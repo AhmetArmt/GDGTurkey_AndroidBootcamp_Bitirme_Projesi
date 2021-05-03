@@ -2,4 +2,13 @@
     <string name="app_name">HarcamaTakipApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="merhabalar">Merhabalar</string>
+    <string name="tl">TL</string>
+    <string name="dolar">Dolar</string>
+    <string name="euro">Euro</string>
+    <string name="sterlin">Sterlin</string>
+    <string name="di_er">Diğer</string>
+    <string name="al_veris">Alışveris</string>
+    <string name="kira">Kira</string>
+    <string name="fatura">Fatura</string>
 </resources>

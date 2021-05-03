@@ -3,26 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph1"
-    app:startDestination="@id/splashscreen_fragment"
+    app:startDestination="@id/main_fragment"
     tools:ignore="InvalidNavigation">
 
         <fragment
             android:id="@+id/main_fragment"
-            android:name="com.example.harcamatakipapp.view.main_fragment"
+            android:name="com.example.harcamatakipapp.view.Main_fragment"
             android:label="fragment_splashscreen_fragment"
             tools:layout="@layout/fragment_splashscreen_fragment" >
             <action
+                android:id="@+id/action_main_fragment_to_kullaniciadi_degistir_fragment2"
+                app:destination="@id/kullaniciadi_degistir_fragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out" />
+            <action
                 android:id="@+id/action_main_fragment_to_harcama_ekle_fragment"
                 app:destination="@id/harcama_ekle_fragment"
-                app:enterAnim="@anim/fragment_fade_enter" />
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out" />
             <action
-                android:id="@+id/action_main_fragment_to_harcama_detayi_fragment2"
-                app:destination="@id/harcama_detayi_fragment"
-                app:enterAnim="@anim/fragment_fade_enter" />
-            <action
-                android:id="@+id/action_main_fragment_to_kullaniciadi_degistir_fragment"
-                app:destination="@id/kullaniciadi_degistir_fragment"
-                app:enterAnim="@anim/fragment_fade_enter" />
+                android:id="@+id/action_main_fragment_to_harcama_detayi_fragment"
+                app:destination="@id/harcama_detayi_fragment" />
         </fragment>
         <fragment
             android:id="@+id/kullaniciadi_degistir_fragment"
@@ -30,19 +31,11 @@
             android:label="kullaniciadi_degistir_fragment" />
         <fragment
             android:id="@+id/harcama_ekle_fragment"
-            android:name="com.example.harcamatakipapp.view.harcama_ekle_fragment"
+            android:name="com.example.harcamatakipapp.view.Harcama_ekle_fragment"
             android:label="harcama_ekle_fragment" />
         <fragment
             android:id="@+id/harcama_detayi_fragment"
             android:name="com.example.harcamatakipapp.view.harcama_detayi_fragment"
             android:label="harcama_detayi_fragment" />
-        <fragment
-            android:id="@+id/splashscreen_fragment"
-            android:name="com.example.harcamatakipapp.view.splashscreen_fragment"
-            android:label="splashscreen_fragment" >
-            <action
-                android:id="@+id/action_splashscreen_fragment_to_main_fragment"
-                app:destination="@id/main_fragment" />
-        </fragment>
 
 </navigation>

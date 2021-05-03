@@ -1,15 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.main_fragment">
+        android:background="@drawable/background_asset"
+        tools:context=".view.Main_fragment">
 
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_kullaniciAdiDegistir"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Kullanıcı Bilgileri"
+
+            app:titleTextColor="@color/ozel_lacivertAcik" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+
+            android:hint="İsminizi Giriniz"
+            app:hintTextColor="@color/ozel_lacivertAcik"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_kullaniciAdiDegistir"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextIsimDegistirici"
+                android:layout_width="350dp"
+                android:layout_height="50dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:checkedButton="@+id/radio_button_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textField">
+
+            <RadioButton
+                android:id="@+id/radio_button_kadin"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="Kadın"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_erkek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="Erkek"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_belirsiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="Belirtmek İstemiyorum"
+                android:textSize="16sp"/>
+
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/button_kullaniciAdiDegistirKAydet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/ozel_lacivertAcik"
+            android:text="Kaydet"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

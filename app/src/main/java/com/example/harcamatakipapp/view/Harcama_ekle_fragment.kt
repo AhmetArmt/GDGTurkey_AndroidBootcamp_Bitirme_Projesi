@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.harcamatakipapp.R
 
 
-class harcama_ekle_fragment : Fragment() {
+class Harcama_ekle_fragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

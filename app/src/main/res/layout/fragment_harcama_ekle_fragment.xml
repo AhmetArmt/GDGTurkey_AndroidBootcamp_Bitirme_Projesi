@@ -1,14 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.main_fragment">
+        android:background="@drawable/background_asset"
+        tools:context=".view.Main_fragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_HarcamaEkleToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Harcama Ekle"
+
+            app:titleTextColor="@color/ozel_lacivertAcik" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldHarcamaAcıklama"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="35dp"
+            android:hint="Harcama Açıklaması"
+            app:hintTextColor="@color/ozel_lacivertAcik"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_HarcamaEkleToolBar"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="350dp"
+                android:layout_height="55dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldHarcamaTutarı"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="20dp"
+            android:hint="Harcama tutarı"
+            app:hintTextColor="@color/ozel_lacivertAcik"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldHarcamaAcıklama"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="350dp"
+                android:layout_height="55dp"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroupHarcamaTuru"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:checkedButton="@+id/radio_button_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldHarcamaTutarı"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/radio_button_Fatura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/fatura"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Kira"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/kira"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Alışveriş"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/al_veris"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Diğer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/di_er"
+                android:textSize="16sp" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioGroupHarcamaDovizi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:checkedButton="@+id/radio_button_1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupHarcamaTuru"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/radio_button_TL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/tl"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Dolar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/dolar"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Euro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/euro"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_Sterlin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:buttonTint="@color/ozel_lacivertAcik"
+                android:text="@string/sterlin"
+                android:textSize="16sp" />
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/button_kullaniciAdiDegistirKAydet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/ozel_lacivertAcik"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            android:text="Ekle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupHarcamaDovizi" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
