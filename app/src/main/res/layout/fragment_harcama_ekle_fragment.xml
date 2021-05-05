@@ -40,6 +40,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittextHarcamaAciklama"
                 android:layout_width="350dp"
                 android:layout_height="55dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edittextHarcamatutar"
                 android:layout_width="350dp"
                 android:layout_height="55dp"
                 android:inputType="number|numberDecimal" />
@@ -84,6 +86,7 @@
                 android:layout_marginBottom="10dp"
                 android:buttonTint="@color/ozel_lacivertAcik"
                 android:text="@string/fatura"
+                android:checked="true"
                 android:textSize="16sp" />
 
             <RadioButton
@@ -96,7 +99,7 @@
                 android:textSize="16sp" />
 
             <RadioButton
-                android:id="@+id/radio_button_Alışveriş"
+                android:id="@+id/radio_button_Alışveris"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -133,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
+                android:checked="true"
                 android:buttonTint="@color/ozel_lacivertAcik"
                 android:text="@string/tl"
                 android:textSize="16sp" />
@@ -171,7 +175,7 @@
 
 
         <Button
-            android:id="@+id/button_kullaniciAdiDegistirKAydet"
+            android:id="@+id/button_harcama_ekle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
