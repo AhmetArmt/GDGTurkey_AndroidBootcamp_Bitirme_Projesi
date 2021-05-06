@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <data>
+        <variable
+            name="secilenHarcama"
+            type="com.example.harcamatakipapp.model.Harcama" />
+    </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,8 +30,9 @@
             app:title="Harcama Detayı"
             app:titleTextColor="@color/ozel_lacivertAcik" />
 
+
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewDetayGorseli"
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:layout_marginTop="120dp"
@@ -33,22 +40,23 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:GorselAyarlayici="@{secilenHarcama.harcamaTuru}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/textViewHarcamaBilgisi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="290dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="Telefon faturasi"
+            android:text="@{secilenHarcama.harcamaBaslik}"
             android:textSize="23dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_harcamaDetayi" />
 
         <TextView
             android:id="@+id/textView4"
@@ -57,7 +65,7 @@
             android:layout_marginTop="25dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="8 $"
+            android:text="@{String.valueOf(secilenHarcama.harcamaTutari)}"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,19 +74,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewHarcamaBilgisi" />
 
         <Button
-            android:id="@+id/button_harcama_ekle"
+            android:id="@+id/button_harcamaDetayi_sil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
+            android:text="sil"
             android:backgroundTint="@color/ozel_kirmizi"
-            android:paddingHorizontal="25dp"
-            android:paddingVertical="10dp"
-            android:text="Sil"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:rippleColor="#771414" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

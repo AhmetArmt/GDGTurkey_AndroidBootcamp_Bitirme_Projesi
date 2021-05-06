@@ -27,9 +27,6 @@ class Harcama_ekle_fragmentVM : ViewModel(), CoroutineScope {
         }
     }
 
-    fun test(){
-
-    }
 
     override fun onCleared() {
         super.onCleared()

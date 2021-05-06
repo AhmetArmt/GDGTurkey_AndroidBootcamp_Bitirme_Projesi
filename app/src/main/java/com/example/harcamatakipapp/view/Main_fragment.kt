@@ -38,9 +38,15 @@ class Main_fragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         // viewmodel baglantisi
         viewModel = ViewModelProviders.of(this).get(Main_fragmentVM::class.java)
 
+        //SwipeReflesh islemleri
+        swipeRefleshMain.setOnRefreshListener {
+            swipeRefleshMain.setColorSchemeResources(R.color.ozel_lacivertAcik)
+            Handler().postDelayed(Runnable {swipeRefleshMain.isRefreshing = false  },3000)
+        }
 
         // toplam harcamayi duzenler
         val toplamArray = viewModel.toplamHarcamaHesaplayici(view.context)
@@ -49,7 +55,6 @@ class Main_fragment : Fragment() {
             toplam += h.harcamaTutari
         }
         textView_mainCardView_harcama.text = toplam.toString()
-
 
         // ! onemli ! (reflesh isleminide yapiyor)
         viewModel.harcamalariGetir(view.context)
@@ -66,11 +71,7 @@ class Main_fragment : Fragment() {
             viewModel.gecisEkle(action,it)
         }
 
-        //SwipeReflesh islemleri
-        swipeRefleshMain.setOnRefreshListener {
-            swipeRefleshMain.setColorSchemeResources(R.color.ozel_lacivertAcik)
-            Handler().postDelayed(Runnable {swipeRefleshMain.isRefreshing = false  },3000)
-        }
+
 
 
 

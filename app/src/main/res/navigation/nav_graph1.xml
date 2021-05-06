@@ -10,7 +10,7 @@
             android:id="@+id/main_fragment"
             android:name="com.example.harcamatakipapp.view.Main_fragment"
             android:label="fragment_splashscreen_fragment"
-            tools:layout="@layout/fragment_splashscreen_fragment" >
+            >
             <action
                 android:id="@+id/action_main_fragment_to_kullaniciadi_degistir_fragment2"
                 app:destination="@id/kullaniciadi_degistir_fragment"
@@ -23,19 +23,31 @@
                 app:exitAnim="@android:anim/fade_out" />
             <action
                 android:id="@+id/action_main_fragment_to_harcama_detayi_fragment"
-                app:destination="@id/harcama_detayi_fragment" />
+                app:destination="@id/harcama_detayi_fragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out" />
         </fragment>
         <fragment
             android:id="@+id/kullaniciadi_degistir_fragment"
             android:name="com.example.harcamatakipapp.view.kullaniciadi_degistir_fragment"
-            android:label="kullaniciadi_degistir_fragment" />
+            android:label="kullaniciadi_degistir_fragment" >
+
+        </fragment>
         <fragment
             android:id="@+id/harcama_ekle_fragment"
             android:name="com.example.harcamatakipapp.view.Harcama_ekle_fragment"
             android:label="harcama_ekle_fragment" />
         <fragment
             android:id="@+id/harcama_detayi_fragment"
-            android:name="com.example.harcamatakipapp.view.harcama_detayi_fragment"
-            android:label="harcama_detayi_fragment" />
+            android:name="com.example.harcamatakipapp.view.Harcama_detayi_fragment"
+            android:label="harcama_detayi_fragment" >
+            <argument
+                android:name="harcama_id"
+                app:argType="integer"
+                android:defaultValue="0" />
+            <action
+                android:id="@+id/action_harcama_detayi_fragment_to_main_fragment"
+                app:destination="@id/main_fragment" />
+        </fragment>
 
 </navigation>

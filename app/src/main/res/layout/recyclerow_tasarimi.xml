@@ -7,18 +7,31 @@
     >
 
     <data>
+        <import type="com.example.harcamatakipapp.util.UtilKt"/>
         <variable
             name="rcvHarcamaBilgisi"
             type="com.example.harcamatakipapp.model.Harcama" />
+        
+        <variable
+            name="rcvListener"
+            type="com.example.harcamatakipapp.adapter.HarcamaClickListener" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/recycler_background"
             android:layout_marginVertical="1dp"
+            android:onClick="@{rcvListener::tiklandi}"
             >
+
+            <TextView
+                android:id="@+id/harcamaIdXML"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@{String.valueOf(rcvHarcamaBilgisi.harcamaId)}"
+                tools:ignore="MissingConstraints"/>
 
             <ImageView
                 android:id="@+id/imageViewRCVHacamaTuru"
@@ -28,7 +41,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:GorselAyarlayici="@{rcvHarcamaBilgisi.harcamaTuru}"
                 tools:srcCompat="@tools:sample/avatars" />
+
 
             <TextView
                 android:id="@+id/textViewRCVHarcamaBilgisi"
@@ -51,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:gravity="center"
-                android:text="@{rcvHarcamaBilgisi.harcamaTuru + rcvHarcamaBilgisi.harcamaDoviz}"
+                android:text="@{String.valueOf(rcvHarcamaBilgisi.harcamaTutari)}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
 

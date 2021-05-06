@@ -3,8 +3,6 @@ package com.example.harcamatakipapp.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.view.WindowManager
 import com.example.harcamatakipapp.R
 
 class MainActivity : AppCompatActivity() {
@@ -14,4 +12,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
 }

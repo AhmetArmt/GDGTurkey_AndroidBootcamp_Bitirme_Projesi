@@ -17,9 +17,9 @@ interface HarcamaDAO {
     suspend fun harcamalariGetir() : List<Harcama>
 
     @Query("SELECT * FROM harcamalarTablosu WHERE harcamaId =:id")
-    suspend fun idyeGoreHarcamaGetir(id : Long) : Harcama
+    suspend fun idyeGoreHarcamaGetir(id : Int) : Harcama
 
     @Query("DELETE FROM harcamalarTablosu WHERE harcamaId =:id")
-    suspend fun dyeGoreHarcamaSil(id : Long)
+    suspend fun idyeGoreHarcamaSil(id : Int)
 
 }
