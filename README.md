@@ -27,6 +27,9 @@ fragmentlar arasındaki düznlemeleri sağlamak ve uygulamamnın sadece 1 Activi
 #### MVVM Yapısı
 Uygulamada MVVM yapısını kullanmaya çalıştım (ilk defa bu projede kullandığım için çok başarılı olduğumu düşünmüyorm)
 
+### Not !
+#### Uygulamayi Google Pixel 2 cihazının çözünürlüğünü referans alarak geliştirdim. Diğer cihazlarda tasarımsal sıkıntılar olabilir.
+
 ### Tekrardan Teşekkürler 
 
 
