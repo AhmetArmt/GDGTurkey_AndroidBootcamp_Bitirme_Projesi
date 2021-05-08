@@ -1,5 +1,6 @@
 package com.example.harcamatakipapp.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -14,7 +15,6 @@ import com.example.harcamatakipapp.model.Doviz
 import com.example.harcamatakipapp.model.Harcama
 import com.example.harcamatakipapp.services.DovizAPIService
 import com.example.harcamatakipapp.services.HarcamaDatabase
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -34,111 +34,33 @@ class Main_fragmentVM() : ViewModel(), CoroutineScope {
     // Degiskenler , Sabitler
     val harcamalarListesi = MutableLiveData<List<Harcama>>()
     private val dovizApi = DovizAPIService()
-    fun refleshDayfaData(vmContext : Context,fragment: Fragment) {
-        if (internetKontrolcusu(vmContext)){
+
+    fun refleshDayfaData(vmContext: Context, fragment: Fragment) {
+        if (internetKontrolcusu(vmContext)) {
             verileriRoomdanGetir(vmContext)
-            dolarVerileriInternettenIndir(vmContext,fragment)
-            euroVerileriInternettenIndir(vmContext,fragment)
-            sterlinVerileriInternettenIndir(vmContext,fragment)
-            tlVerileriInternettenIndir(vmContext,fragment)
-        }else{
+            dolarVerileriInternettenIndir(vmContext, fragment)
+            euroVerileriInternettenIndir(vmContext, fragment)
+            sterlinVerileriInternettenIndir(vmContext, fragment)
+            tlVerileriInternettenIndir(vmContext, fragment)
+        } else {
             verileriRoomdanGetir(vmContext)
-           Toast.makeText(vmContext,"Internet Bağlantısı Yok",Toast.LENGTH_SHORT).show()
+            Toast.makeText(vmContext, "Internet Bağlantısı Yok", Toast.LENGTH_SHORT).show()
         }
 
     }
 
 
-
-    fun verileriRoomdanGetir(vmContext : Context) {
+    fun verileriRoomdanGetir(vmContext: Context) {
         launch {
             val database = HarcamaDatabase(vmContext).harcamaDao
             harcamalariEsitle(database.harcamalariGetir())
         }
     }
 
-   private fun dolarVerileriInternettenIndir(vmContext: Context,fragment: Fragment) {
-        val sharedPr =fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
-        dovizApi.getDoviz("USD").enqueue(object : Callback<Doviz> {
-            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
-                val dovizUsdto = response.body()!!.rates
-                val editor = sharedPr.edit()
-                editor.putFloat("usdtotl", dovizUsdto.tl)
-                editor.putFloat("usdtoeur", dovizUsdto.euro)
-                editor.putFloat("usdtogbp", dovizUsdto.sterlin)
-                editor.putFloat("usdtousd", 1f)
-                Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
-            }
 
-            override fun onFailure(call: Call<Doviz>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
-
-   private fun euroVerileriInternettenIndir(vmContext: Context,fragment: Fragment) {
-        val sharedPr =fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
-        dovizApi.getDoviz("EUR").enqueue(object : Callback<Doviz> {
-            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
-                val dovizEurto = response.body()!!.rates
-                val editor = sharedPr.edit()
-                editor.putFloat("eurtotl", dovizEurto.tl)
-                editor.putFloat("eurtoeur", 1f)
-                editor.putFloat("eurtogbp", dovizEurto.sterlin)
-                editor.putFloat("eurtousd", dovizEurto.dolar)
-                Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
-            }
-
-            override fun onFailure(call: Call<Doviz>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
-
-   private fun sterlinVerileriInternettenIndir(vmContext: Context,fragment: Fragment) {
-        val sharedPr =fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
-        dovizApi.getDoviz("GBP").enqueue(object : Callback<Doviz> {
-            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
-                val dovizGbpto = response.body()!!.rates
-                val editor = sharedPr.edit()
-                editor.putFloat("gbptotl", dovizGbpto.tl)
-                editor.putFloat("gbptoeur", dovizGbpto.euro)
-                editor.putFloat("gbptogbp", 1f)
-                editor.putFloat("gbptousd", dovizGbpto.dolar)
-                Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
-            }
-
-            override fun onFailure(call: Call<Doviz>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
-
-   private fun tlVerileriInternettenIndir(vmContext: Context,fragment: Fragment) {
-        val sharedPr =fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
-        dovizApi.getDoviz("TRY").enqueue(object : Callback<Doviz> {
-            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
-                val dovizTlto = response.body()!!.rates
-                val editor = sharedPr.edit()
-                editor.putFloat("tltotl", 1f)
-                editor.putFloat("tltoeur", dovizTlto.euro)
-                editor.putFloat("tltogbp", dovizTlto.sterlin)
-                editor.putFloat("tltousd", dovizTlto.dolar)
-                Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
-            }
-
-            override fun onFailure(call: Call<Doviz>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-    }
-
-
-    private fun harcamalariEsitle(harcamaList : List<Harcama>) {
+    private fun harcamalariEsitle(harcamaList: List<Harcama>) {
         harcamalarListesi.value = harcamaList
     }
-
-
 
     private fun internetKontrolcusu(context: Context): Boolean {
         var result = false
@@ -169,11 +91,266 @@ class Main_fragmentVM() : ViewModel(), CoroutineScope {
     }
 
 
+    private fun dolarVerileriInternettenIndir(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        dovizApi.getDoviz("USD").enqueue(object : Callback<Doviz> {
+            val editor = sharedPr.edit()
+            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
+                val dovizUsdto = response.body()!!.rates
+                editor.putFloat("usdtotl", dovizUsdto.tl)
+                editor.putFloat("usdtoeur", dovizUsdto.euro)
+                editor.putFloat("usdtogbp", dovizUsdto.sterlin)
+                editor.putFloat("usdtousd", 1f)
+                editor.apply()
+                editor.commit()
+                if (editor.commit()) Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
 
-    override fun onCleared() {
-        super.onCleared()
-        job.cancel()
+            }
+
+            override fun onFailure(call: Call<Doviz>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
+
+    private fun euroVerileriInternettenIndir(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        dovizApi.getDoviz("EUR").enqueue(object : Callback<Doviz> {
+            val editor = sharedPr.edit()
+            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
+                val dovizEurto = response.body()!!.rates
+                editor.putFloat("eurtotl", dovizEurto.tl)
+                editor.putFloat("eurtoeur", 1f)
+                editor.putFloat("eurtogbp", dovizEurto.sterlin)
+                editor.putFloat("eurtousd", dovizEurto.dolar)
+                editor.apply()
+                editor.commit()
+                if (editor.commit()) Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
+
+            }
+
+            override fun onFailure(call: Call<Doviz>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun sterlinVerileriInternettenIndir(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        dovizApi.getDoviz("GBP").enqueue(object : Callback<Doviz> {
+            val editor = sharedPr.edit()
+            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
+                val dovizGbpto = response.body()!!.rates
+                editor.putFloat("gbptotl", dovizGbpto.tl)
+                editor.putFloat("gbptoeur", dovizGbpto.euro)
+                editor.putFloat("gbptogbp", 1f)
+                editor.putFloat("gbptousd", dovizGbpto.dolar)
+                editor.apply()
+                editor.commit()
+                if (editor.commit()) Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
+            }
+
+            override fun onFailure(call: Call<Doviz>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    private fun tlVerileriInternettenIndir(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        dovizApi.getDoviz("TRY").enqueue(object : Callback<Doviz> {
+            val editor = sharedPr.edit()
+            override fun onResponse(call: Call<Doviz>, response: Response<Doviz>) {
+                val dovizTlto = response.body()!!.rates
+                editor.putFloat("tltotl", 1f)
+                editor.putFloat("tltoeur", dovizTlto.euro)
+                editor.putFloat("tltogbp", dovizTlto.sterlin)
+                editor.putFloat("tltousd", dovizTlto.dolar)
+                editor.apply()
+                editor.commit()
+                if (editor.commit()) Log.e("RETROFIT_LOG : ", "ERISIM SAGLANIYOR")
+            }
+
+            override fun onFailure(call: Call<Doviz>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+
+    fun dolarConventer(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        verileriRoomdanGetir(vmContext)
+        var conventedArray = harcamalarListesi.value
+        launch {
+            val database = HarcamaDatabase(vmContext).harcamaDao
+            for (h in conventedArray!!) {
+                if (h.harcamaDoviz == "₺") {
+                    val deger = sharedPr.getFloat("tltousd", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("$", h.harcamaId)
+                } else if (h.harcamaDoviz == "€") {
+                    val deger = sharedPr.getFloat("eurtousd", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("$", h.harcamaId)
+                } else if (h.harcamaDoviz == "£") {
+                    val deger = sharedPr.getFloat("gbptousd", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("$", h.harcamaId)
+                } else {
+                    val deger = 1f
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("$", h.harcamaId)
+                }
+            }
+            harcamalariEsitle(conventedArray)
+        }
+
+    }
+
+
+
+
+
+    fun euroConventer(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        verileriRoomdanGetir(vmContext)
+        var conventedArray = harcamalarListesi.value
+
+        launch {
+            val database = HarcamaDatabase(vmContext).harcamaDao
+            for (h in conventedArray!!) {
+                if (h.harcamaDoviz == "₺") {
+                    val deger = sharedPr.getFloat("tltoeur", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("€", h.harcamaId)
+                } else if (h.harcamaDoviz == "€") {
+                    val deger = sharedPr.getFloat("eurtoeur", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("€", h.harcamaId)
+                } else if (h.harcamaDoviz == "£") {
+                    val deger = sharedPr.getFloat("gbptoeur", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("€", h.harcamaId)
+                } else {
+                    val deger = sharedPr.getFloat("usdtoeur", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("€", h.harcamaId)
+                }
+            }
+            harcamalariEsitle(conventedArray)
+        }
+
+    }
+
+    fun sterlinConventer(vmContext: Context, fragment: Fragment) {
+        val sharedPr =
+            fragment.requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+        verileriRoomdanGetir(vmContext)
+        var conventedArray = harcamalarListesi.value
+
+        launch {
+            val database = HarcamaDatabase(vmContext).harcamaDao
+            for (h in conventedArray!!) {
+                if (h.harcamaDoviz == "₺") {
+                    val deger = sharedPr.getFloat("tltogbp", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("£", h.harcamaId)
+                } else if (h.harcamaDoviz == "€") {
+                    val deger = sharedPr.getFloat("eurtogbp", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("£", h.harcamaId)
+                } else if (h.harcamaDoviz == "£") {
+                    val deger = sharedPr.getFloat("gbptogbp", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("£", h.harcamaId)
+                } else {
+                    val deger = sharedPr.getFloat("usdtogbp", 1f)
+                    val yenilenenDeger = (h.harcamaTutari * deger)
+                    database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                    database.updateHarcamaDoviz("£", h.harcamaId)
+                }
+            }
+            harcamalariEsitle(conventedArray)
+        }
+    }
+
+    fun tlConventer(vmContext: Context, fragment: Fragment) {
+            val sharedPr = fragment.requireActivity()
+                .getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
+            verileriRoomdanGetir(vmContext)
+            var conventedArray = harcamalarListesi.value
+
+            launch {
+                val database = HarcamaDatabase(vmContext).harcamaDao
+                for (h in conventedArray!!) {
+                    if (h.harcamaDoviz == "₺") {
+                        val deger = sharedPr.getFloat("tltotl", 1f)
+                        val yenilenenDeger = (h.harcamaTutari * deger)
+                        database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                        database.updateHarcamaDoviz("₺", h.harcamaId)
+                    } else if (h.harcamaDoviz == "€") {
+                        val deger = sharedPr.getFloat("eurtotl", 1f)
+                        val yenilenenDeger = (h.harcamaTutari * deger)
+                        database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                        database.updateHarcamaDoviz("₺", h.harcamaId)
+                    } else if (h.harcamaDoviz == "£") {
+                        val deger = sharedPr.getFloat("gbptotl", 1f)
+                        val yenilenenDeger = (h.harcamaTutari * deger)
+                        database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                        database.updateHarcamaDoviz("₺", h.harcamaId)
+                    } else {
+                        val deger = sharedPr.getFloat("usdtotl", 1f)
+                        val yenilenenDeger = (h.harcamaTutari * deger)
+                        database.updateHarcamaTutar(yenilenenDeger, h.harcamaId)
+                        database.updateHarcamaDoviz("₺", h.harcamaId)
+                    }
+                }
+                harcamalariEsitle(conventedArray)
+            }
+
+
+        }
+
+
+fun toplamHarcama (vmContext: Context) : Float {
+    var toplam = 0f
+    launch {
+        val database = HarcamaDatabase(vmContext).harcamaDao
+        harcamalariEsitle(database.harcamalariGetir())
+        for (i in harcamalarListesi.value!!){
+            toplam += i.harcamaTutari
+        }
+
+    }
+
+    return toplam
+
+ }
+
+        override fun onCleared() {
+            super.onCleared()
+            job.cancel()
+        }
+
+
 
 }
 

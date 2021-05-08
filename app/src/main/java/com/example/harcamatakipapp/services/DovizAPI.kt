@@ -12,8 +12,6 @@ interface DovizAPI {
     // URL -> latest?base=TRY&symbols=GBP,USD,EUR
 
 
-
-
     @GET("latest?base=TRY&symbols=USD,EUR,GBP")
     fun tryVerisiniAl() : Call<Doviz>
 

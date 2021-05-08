@@ -52,7 +52,7 @@ class Harcama_ekle_fragment() : Fragment() {
 
                 val harcamaAciklama = edittextHarcamaAciklama.text.toString()
 
-                val harcamaTurar = edittextHarcamatutar.text.toString().toLong()
+                val harcamaTurar = edittextHarcamatutar.text.toString().toFloat()
 
                 var harcamaDoviz : String
                 if (radio_button_TL.isChecked) harcamaDoviz = "₺"

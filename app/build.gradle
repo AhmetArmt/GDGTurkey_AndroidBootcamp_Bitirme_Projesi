@@ -48,8 +48,6 @@ dependencies {
     def room_version = "2.3.0"
     def nav_version = "2.3.5"
     def retrofitVersion = '2.9.0'
-    def rxJavaVersion = '2.2.8'
-    def rxAndroidVersion = '2.1.1'
     def lifeCycleExtensionVersion = '1.1.1'
     def lottieVersion = '3.4.0'
 
@@ -76,11 +74,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-
-
-    //RxJava
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     //LifecycleExt
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"

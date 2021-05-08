@@ -13,9 +13,9 @@ data class Harcama(
     @ColumnInfo(name ="harcamaBaslik")
     var harcamaBaslik: String,
     @ColumnInfo(name ="harcamaTutari")
-    var harcamaTutari: Long,
+    var harcamaTutari: Float,
     @ColumnInfo(name = "harcamaDoviz")
-    val harcamaDoviz: String // 1 -> TL  2 -> Dolar  3 -> Euro  4 -> Sterlin
+    val harcamaDoviz: String //
                     ) {
     @PrimaryKey(autoGenerate = true)
     var harcamaId : Int = 0

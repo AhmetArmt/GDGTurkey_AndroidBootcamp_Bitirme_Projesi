@@ -23,6 +23,9 @@ interface HarcamaDAO {
     @Query("DELETE FROM harcamalarTablosu WHERE harcamaId =:id")
     suspend fun idyeGoreHarcamaSil(id : Int)
 
-    @Query("UPDATE harcamalarTablosu SET harcamaDoviz =:harcamadoviz AND harcamaTutari = :harcama WHERE harcamaId = :id")
-    suspend fun updateHarcama(harcamadoviz : String, harcama : Long, id : Int)
+    @Query("UPDATE harcamalarTablosu SET harcamaDoviz =:harcamadoviz WHERE harcamaId = :id")
+    suspend fun updateHarcamaDoviz(harcamadoviz : String, id : Int)
+
+    @Query("UPDATE harcamalarTablosu SET harcamaTutari =:harcamatutari WHERE harcamaId = :id")
+    suspend fun updateHarcamaTutar(harcamatutari : Float, id : Int)
 }

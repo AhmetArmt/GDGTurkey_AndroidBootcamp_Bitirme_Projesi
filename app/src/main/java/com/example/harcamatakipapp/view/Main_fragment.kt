@@ -29,7 +29,7 @@ class Main_fragment : Fragment() {
 
     private lateinit var viewModel : Main_fragmentVM
     private val  madapter = MainRecyclerAdapter(arrayListOf())
-    private val dovizApi = DovizAPIService()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,6 @@ class Main_fragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main_fragment, container, false)
-
         return view
     }
 
@@ -57,22 +56,23 @@ class Main_fragment : Fragment() {
         //SharedPreferences
         val sharedPr = requireActivity().getSharedPreferences("sharedPrefDatas", Context.MODE_PRIVATE)
 
-        observeLiveData()
+        observeLiveData(view.context)
+
+        // toplam gosterme
+        var toplam = viewModel.toplamHarcama(view.context)
+        textView_mainCardView_harcama.text = toplam.toString()
+
 
         viewModel.refleshDayfaData(view.context,this)
-
-
 
 
         // RCV adapter islemleri
         mainRCV.layoutManager = LinearLayoutManager(context)
         mainRCV.adapter = madapter
 
-
         //Kullanici adi alici
         val isim = sharedPr.getString("KullaniciAdi", "hata")
         textView_mainCardView_isim.text = isim
-
 
         //SwipeReflesh islemleri
         swipeRefleshMain.setOnRefreshListener {
@@ -80,8 +80,8 @@ class Main_fragment : Fragment() {
             swipeRefleshMain.isRefreshing = false
             viewModel.refleshDayfaData(view.context,this)
             Toast.makeText(view.context,"Liste Guncellendi",Toast.LENGTH_SHORT).show()
+            textView_mainCardView_harcama.text = viewModel.toplamHarcama(view.context).toString()
         }
-
 
         // kullanici bilgileri ekranina gecis
         mainCardView.setOnClickListener {
@@ -89,18 +89,55 @@ class Main_fragment : Fragment() {
             findNavController().navigate(action)
         }
 
-
         // harcama ekle ekranina gecis
         fabEkle.setOnClickListener {
             val action = Main_fragmentDirections.actionMainFragmentToHarcamaEkleFragment()
             findNavController().navigate(action)
         }
+
+
+
+
+        //Dolar Button
+        buttonDolar.setOnClickListener {
+            viewModel.dolarConventer(view.context,this)
+            viewModel.verileriRoomdanGetir(view.context)
+            Toast.makeText(view.context,"Değişiklik Yapıldı Sayfayı Yenileyin",Toast.LENGTH_SHORT).show()
+        }
+
+        //Euro Button
+        buttonEuro.setOnClickListener {
+            viewModel.euroConventer(view.context,this)
+            viewModel.refleshDayfaData(view.context,this)
+            Toast.makeText(view.context,"Değişiklik Yapıldı Sayfayı Yenileyin",Toast.LENGTH_SHORT).show()
+        }
+
+        //Sterlin Button
+        buttonSterlin.setOnClickListener {
+        viewModel.sterlinConventer(view.context,this)
+        viewModel.verileriRoomdanGetir(view.context)
+
+        Toast.makeText(view.context,"Değişiklik Yapıldı Sayfayı Yenileyin",Toast.LENGTH_SHORT).show()
+
+        }
+
+        // TL Button
+        buttonTL.setOnClickListener {
+        viewModel.tlConventer(view.context,this)
+        viewModel.verileriRoomdanGetir(view.context)
+        Toast.makeText(view.context,"Değişiklik Yapıldı Sayfayı Yenileyin",Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
-    fun observeLiveData (){
+    fun observeLiveData (context: Context){
         viewModel.harcamalarListesi.observe(viewLifecycleOwner, Observer {
             madapter.harcamaListesiniGuncelle(it)
         })
+
+        textView_mainCardView_harcama.text = viewModel.toplamHarcama(context).toString()
+
 
 
     }
