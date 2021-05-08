@@ -30,7 +30,9 @@ Uygulamada MVVM yapısını kullanmaya çalıştım (ilk defa bu projede kulland
 ### Not !
 #### Uygulamayi Google Pixel 2 cihazının çözünürlüğünü referans alarak geliştirdim. Diğer cihazlarda tasarımsal sıkıntılar olabilir.
 
-### Tekrardan Teşekkürler 
+
+## Uygulama içinden görüntüler
+![](screenshots/1.png) ![](screenshots/2.png) ![](screenshots/3.png) ![](screenshots/4.png) ![](screenshots/5.png) ![](screenshots/6.png) ![](screenshots/7.png) ![](screenshots/8.png) 
 
 
 
