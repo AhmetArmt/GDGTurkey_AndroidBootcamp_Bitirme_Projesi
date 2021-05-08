@@ -2,6 +2,7 @@ package com.example.harcamatakipapp.view
 
 import android.content.Context
 import android.os.Bundle
+import android.text.BoringLayout.make
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.harcamatakipapp.R
 import com.example.harcamatakipapp.model.Harcama
 import com.example.harcamatakipapp.viewmodel.Harcama_ekle_fragmentVM
@@ -63,7 +65,10 @@ class Harcama_ekle_fragment() : Fragment() {
 
                 viewModel.harcamaEkle(eklenecekHarcama, view.context)
 
-                Snackbar.make(it, "Harcamanız Kaydedildi", Snackbar.LENGTH_SHORT).show()
+                val action = Harcama_ekle_fragmentDirections.actionHarcamaEkleFragmentToMainFragment()
+                findNavController().navigate(action)
+
+                Toast.makeText(view.context,"Harcamaniz Kaydedildi",Toast.LENGTH_SHORT).show()
             }
         }
 

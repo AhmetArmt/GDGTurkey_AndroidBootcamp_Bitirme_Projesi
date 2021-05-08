@@ -11,6 +11,7 @@ import com.example.harcamatakipapp.databinding.RecyclerowTasarimiBinding
 import com.example.harcamatakipapp.model.Harcama
 import com.example.harcamatakipapp.view.Main_fragmentDirections
 import kotlinx.android.synthetic.main.recyclerow_tasarimi.view.*
+import kotlin.math.absoluteValue
 
 class MainRecyclerAdapter (var harcamaListesi : ArrayList<Harcama>) : RecyclerView.Adapter<MainRecyclerAdapter.HarcamaViewHolder>(), HarcamaClickListener {
 
@@ -39,7 +40,10 @@ class MainRecyclerAdapter (var harcamaListesi : ArrayList<Harcama>) : RecyclerVi
 
       //DataBinding
       holder.dbview.rcvHarcamaBilgisi = harcamaListesi[position]
-      holder.dbview.rcvListener = this
+
+
+
+        holder.dbview.rcvListener = this
 
     }
 

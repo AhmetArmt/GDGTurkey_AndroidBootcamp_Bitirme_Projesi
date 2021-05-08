@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.harcamatakipapp.R
 import com.example.harcamatakipapp.databinding.FragmentHarcamaDetayiFragmentBinding
 import com.example.harcamatakipapp.viewmodel.Harcama_detayi_fragmentVM
@@ -44,15 +46,12 @@ class Harcama_detayi_fragment : Fragment() {
 
         viewModel.harcamaDetayiniGetir(view.context,harcamaId)
 
-        // Harcamalarin Harcama Detayi Fragment uzerindeki gorsellerini ayarlar
 
 
         obsLiveData()
 
 
-
-
-        // Alertview ile secilen veriyi silip silmek istemedi[imizi sorar
+        // Alertview ile secilen veriyi silip silmek istemedigimizi sorar
         button_harcamaDetayi_sil.setOnClickListener {
 
             val alert = AlertDialog.Builder(view.context)
@@ -63,10 +62,9 @@ class Harcama_detayi_fragment : Fragment() {
 
             alert.setPositiveButton("Evet") { dialogInterface, listener ->
                 viewModel.harcamaSil(view.context,harcamaId)
-
-               val action = Harcama_detayi_fragmentDirections.actionHarcamaDetayiFragmentToMainFragment()
-               viewModel.gecisEkle(action,view)
-
+                val action = Harcama_detayi_fragmentDirections.actionHarcamaDetayiFragmentToMainFragment()
+                findNavController().navigate(action)
+                Toast.makeText(view.context,"Harcamanız Silindi",Toast.LENGTH_SHORT).show()
             }
 
             alert.setNegativeButton("Hayır") {dialogInterface, listener ->
@@ -76,6 +74,9 @@ class Harcama_detayi_fragment : Fragment() {
         }
 
     }
+
+
+
 
     fun obsLiveData() {
         viewModel.harcamaLiveData.observe(viewLifecycleOwner, Observer {
