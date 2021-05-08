@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.harcamatakipapp.model.Harcama
 
 @Dao
@@ -22,4 +23,6 @@ interface HarcamaDAO {
     @Query("DELETE FROM harcamalarTablosu WHERE harcamaId =:id")
     suspend fun idyeGoreHarcamaSil(id : Int)
 
+    @Query("UPDATE harcamalarTablosu SET harcamaDoviz =:harcamadoviz AND harcamaTutari = :harcama WHERE harcamaId = :id")
+    suspend fun updateHarcama(harcamadoviz : String, harcama : Long, id : Int)
 }

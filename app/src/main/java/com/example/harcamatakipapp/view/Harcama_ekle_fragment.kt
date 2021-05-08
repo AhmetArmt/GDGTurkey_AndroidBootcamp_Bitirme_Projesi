@@ -54,13 +54,13 @@ class Harcama_ekle_fragment() : Fragment() {
 
                 val harcamaTurar = edittextHarcamatutar.text.toString().toLong()
 
-                var harcamaDoviz = 0
-                if (radio_button_TL.isChecked) harcamaDoviz = 1
-                if (radio_button_Dolar.isChecked) harcamaDoviz = 2
-                if (radio_button_Euro.isChecked) harcamaDoviz = 3
-                if (radio_button_Sterlin.isChecked) harcamaDoviz = 4
+                var harcamaDoviz : String
+                if (radio_button_TL.isChecked) harcamaDoviz = "₺"
+                else if (radio_button_Dolar.isChecked) harcamaDoviz = "$"
+                else if (radio_button_Euro.isChecked) harcamaDoviz = "€"
+                else  harcamaDoviz = "£"
 
-                var eklenecekHarcama =
+                val eklenecekHarcama =
                     Harcama(harcamaTuru, harcamaAciklama, harcamaTurar, harcamaDoviz)
 
                 viewModel.harcamaEkle(eklenecekHarcama, view.context)

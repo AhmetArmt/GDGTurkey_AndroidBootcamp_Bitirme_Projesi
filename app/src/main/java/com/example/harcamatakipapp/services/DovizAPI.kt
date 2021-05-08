@@ -14,16 +14,16 @@ interface DovizAPI {
 
 
 
-    @GET("latest?base=TRY&symbols=TRY,USD,EUR,GBP")
+    @GET("latest?base=TRY&symbols=USD,EUR,GBP")
     fun tryVerisiniAl() : Call<Doviz>
 
-    @GET("latest?base=USD&symbols=TRY,USD,EUR,GBP")
+    @GET("latest?base=USD&symbols=TRY,EUR,GBP")
     fun usdVerisiniAl() : Call<Doviz>
 
-    @GET("latest?base=EUR&symbols=TRY,USD,EUR,GBP")
+    @GET("latest?base=EUR&symbols=TRY,USD,GBP")
     fun eurVerisiniAl() : Call<Doviz>
 
-    @GET("latest?base=GBP&symbols=TRY,USD,EUR,GBP")
+    @GET("latest?base=GBP&symbols=TRY,USD,EUR")
     fun gbpVerisiniAl() : Call<Doviz>
 
 

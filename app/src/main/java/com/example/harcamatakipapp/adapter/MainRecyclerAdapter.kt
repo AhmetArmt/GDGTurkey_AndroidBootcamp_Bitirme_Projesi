@@ -57,8 +57,14 @@ class MainRecyclerAdapter (var harcamaListesi : ArrayList<Harcama>) : RecyclerVi
         Navigation.findNavController(view).navigate(action)
     }
 
+    fun harcamaListesiniGuncelle(yeniharcamaLsitesi : List<Harcama>) {
+        harcamaListesi.clear()
+        harcamaListesi.addAll(yeniharcamaLsitesi)
+        notifyDataSetChanged()
+    }
 
-   }
+
+}
 
 
 
